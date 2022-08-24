@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Photo Send</title>
+        <link rel="stylesheet" type="text/css" href="./styles.css">
+    </head>
+    <body>
+        <div id="background">
+            <div id="box" style="margin-top: 30px">
+                <form action="/profile" method="post" enctype="multipart/form-data">
+                    <div class="usrinputs" id="email">Email : <input class ="input" type="text"></div>
+                    <div class="usrinputs" id="full_name">Full Name : <input type="text" class="input"></div>
+                    <div class="usrinputs" id="Message">Message : <textarea class="input"></textarea></div>
+                    <div class="usrinputs" id="full_name">Photo : <input type="file" class="input" name="pic"/></div>
+                    <button type="submit" id="submit_btn" class="btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
