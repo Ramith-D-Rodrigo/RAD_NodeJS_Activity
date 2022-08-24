@@ -59,6 +59,6 @@ html,body{
 }
 
 .input{
-    max-width: 100px;
-    margin-left: 25px;
+    min-width: 100px;
+    margin-left: 15px;
 }
