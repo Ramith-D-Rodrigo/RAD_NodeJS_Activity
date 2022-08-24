@@ -13,11 +13,12 @@
                 <div id="topic">
                     LOGIN
                 </div>
-                <form action="/register" method="POST">
-                    <div class="usrinputs" id="username">Username : <input type="text" class="input"></div>
-                    <div class="usrinputs" id="pass">Password : <input type="password" class="input"></div>
+                <form action="/login" method="POST">
+                    <div class="usrinputs">Username : <input type="text" class="input" name="username"></div>
+                    <div class="usrinputs">Password : <input type="password" class="input" name="password"></div>
                     <button type="submit" value="Log in" id="log_in_btn" class="btn">LOGIN</button>
-                    
+                </form>
+                <form action="/register" method="POST">   
                     <div>
                         <p style="text-align: center">New User?</p>
                         <button type="submit" value="sign up" id="sign_up_btn" class="btn">SIGN UP</button>
