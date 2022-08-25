@@ -11,9 +11,10 @@ const flash = require('express-flash');
 const session = require('express-session');
 
 const initialize_passport = require('./session.js');
-initialize_passport(passport, username => {
-    users.find(user => user.username == username);  //find the input username from the users array (who are registered)
-});
+initialize_passport(passport,
+    username => users.find(user => user.username === username), //find the input username from the users array (who are registered)
+    userid => users.find(user => user.id === userid)
+)
 
 const users = [];
 
@@ -22,8 +23,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
 app.use(session({
-    secret: process.env.SESSION_SECRET
+    secret: process.env.SESSION_SECRET,
+    resave: false,   //do not save when nothing is changed
+    saveUninitialized: false //do not save empty values
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/",(req, res)=>{
     res.render("index");
@@ -46,7 +52,12 @@ app.post("/register", async (req, res)=>{
         console.log(users);
     }
     else{   //user login
-
+        console.log('login');
+        passport.authenticate('local', {
+            successRedirect: '/welcome',
+            failureRedirect: '/register',
+            failureFlash: true
+        });
     }
 });
 app.listen(3000);

@@ -1,19 +1,23 @@
-const localstrategy = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 
-function initialize(passport, getUserbyuserName){
-    const authenticate = (username, password, done) => {
+function initialize(passport, getUserbyuserName, getUserbyID){
+    const authenticateUser = async (username, password, done) => {
         const user = getUserbyuserName(username);
+        console.group(user);
         if(user == null){
+            console.log("user not found");
             return done(null, false, {message: 'User was not found'});
         }
 
         try{
             if(await bcrypt.compare(password, user.password) == true){
-                return(null, user);
+                console.log("correct password");
+                return done(null, user);
             }
             else{
+                console.log("incorrect password");
                 return done(null, false, {message: 'Incorrect password'});
             }
         }
@@ -21,9 +25,11 @@ function initialize(passport, getUserbyuserName){
             return done(e);
         }
     }
-    passport.use(new localstrategy( { username: 'username'}), authenticate);
-    passport.serializeUser((user, done) =>{ })
-    passport.deserializeUser((id, done) =>{ })    
+    passport.use(new localStrategy( { usernameField: 'username'}, authenticateUser));
+    passport.serializeUser((user, done) =>{ done(null, user.id) })
+    passport.deserializeUser((id, done) =>{ 
+        return done(null, getUserbyID(id));
+    })    
 }
 
-modules.exports = initialize;
+module.exports = initialize;

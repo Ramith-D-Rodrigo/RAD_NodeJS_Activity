@@ -12,6 +12,9 @@
             <div id="box">
                 <div id="topic">
                     LOGIN
+                    <% if(messages.error){ %>
+                        <%= messages.error %>
+                    <% } %>
                 </div>
                 <form action="/register" method="POST">   
                         <div class="usrinputs">Username : <input type="text" class="input" name="username"></div>
