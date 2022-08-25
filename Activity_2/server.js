@@ -22,7 +22,6 @@ app.get("/",(req, res)=>{
 });
 
 app.post('/profile', upload.single('pic'), function(req, res, next){
-  req.file.filename = req.file.originalname;
   res.send("File uploaded!");
 });
 
