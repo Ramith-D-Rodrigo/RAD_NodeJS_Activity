@@ -6,17 +6,17 @@ function initialize(passport, getUserbyuserName, getUserbyID){
     const authenticateUser = async (username, password, done) => {
         const user = getUserbyuserName(username);
         console.log(user);
-        if(user == null){
+        if(user == null){   //user not found
             console.log("user not found");
             return done(null, false, {message: 'User was not found'});
         }
 
         try{
-            if(await bcrypt.compare(password, user.password) == true){
-                console.log("correct password");
+            if(await bcrypt.compare(password, user.password) == true){  //correct password
+                console.log("correct password");    
                 return done(null, user);
             }
-            else{
+            else{   //incorrect password
                 console.log("incorrect password");
                 return done(null, false, {message: 'Incorrect password'});
             }
