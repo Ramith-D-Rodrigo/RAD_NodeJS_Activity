@@ -11,7 +11,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 
 const initialize_passport = require('./user_authentication.js');
-const e = require('express');
+
 initialize_passport(passport,
     username => users.find(user => user.name === username), //find the input username from the users array (who are registered)
     userid => users.find(user => user.id === userid)    //find the id for that user
